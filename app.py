@@ -1,5 +1,14 @@
-#Copyright @Arslan-MD
-#Updates Channel t.me/arslanmd
+# ============================================================
+# ESCANOR OTP BOT - EMPIRE MD
+# ============================================================
+# Copyright (c) 2026 Sins.Outlaw
+# 
+# This software is part of the Empire MD project.
+# Unauthorized distribution or modification is prohibited.
+# 
+# Built with ☠️ for Escanor OTP Bot
+# ============================================================
+
 from flask import Flask, request, jsonify
 from datetime import datetime
 import cloudscraper
@@ -14,7 +23,7 @@ import brotli
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-class IVASSMSClient:
+class EmpireMDClient:
     def __init__(self):
         self.scraper = cloudscraper.create_scraper()
         self.base_url = "https://www.ivasms.com"
@@ -322,7 +331,7 @@ class IVASSMSClient:
         return all_otp_messages
 
 app = Flask(__name__)
-client = IVASSMSClient()
+client = EmpireMDClient()
 
 with app.app_context():
     if not client.login_with_cookies():
@@ -331,8 +340,10 @@ with app.app_context():
 @app.route('/')
 def welcome():
     return jsonify({
-        'message': 'Welcome to the IVAS SMS API',
+        'message': '⚔️ Welcome to Escanor OTP Bot - Empire MD ⚔️',
         'status': 'API is alive',
+        'version': '1.0.0',
+        'author': 'Sins.Outlaw',
         'endpoints': {
             '/sms': 'Get OTP messages for a specific date (format: DD/MM/YYYY) with optional limit. Example: /sms?date=01/05/2025&limit=10'
         }
@@ -403,4 +414,6 @@ def get_sms():
     })
 
 if __name__ == '__main__':
+    print("⚔️ ESCANOR OTP BOT - EMPIRE MD ⚔️")
+    print("🔥 Starting server on port 5000...")
     app.run(host='0.0.0.0', port=5000, debug=False)
